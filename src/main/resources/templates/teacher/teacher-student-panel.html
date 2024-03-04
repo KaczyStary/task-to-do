@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <body>
+        <div>
+            <table>
+                <thead>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+
+
+                        <td>
+                            <a th:href="@{/teacher}">all students</a>
+
+                            <p th:text="${studentInfo.getId()}"></p>
+                            <p th:text="${studentInfo.getFirstName()}"></p>
+                            <p th:text="${studentInfo.getLastName()}"></p>
+                            <p th:text="${studentInfo.getEmail()}"></p>
+                            <p th:text="${studentInfo.getPassword()}"></p>
+                            <p th:text="${studentInfo.getRole()}"></p>
+                            <p th:text="${studentInfo.getEnabled()}"></p>
+
+                        </td>
+
+                    </tr>
+
+                    <tr th:each="st: ${studentTasks}">
+
+                        <td>
+
+                            <p th:text="${st.getTask().getId()}"></p>
+                            <p th:text="${st.getTask().getName()}"></p>
+                            <p th:text="${st.getTask().getDescription()}"></p>
+
+                            <span th:if="${st.getFinishDate()!=null}" th:text="${st.getNote()}"></span>
+                            <span th:if="${st.getFinishDate()==null}">--</span>
+                            <span>/</span>
+                            <span th:text="${st.getTask().getMax()}"></span><br>
+
+                            <p th:text="${st.getTask().getDeadline()}"></p>
+                            <p th:text="${st.getFinishDate()}"></p>
+                            <p th:text="${st.getContent()}"></p>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+
+            </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+    <head th:insert="main::head">
+    </head>
+
+    <body>
+        <nav th:replace="main::navigation"></nav>
+
+        <div class="container m-3">
+            <div class="container">
+                <h2>Application with tasks</h2>
+            </div>
+
+            <h3>Config</h3>
+
+            <ul>
+                <li>
+                    Defalut page size: <span th:text="${pageSize}"></span>
+                </li>
+                <li>
+                    Default page start: <span th:text="${pageStart}"></span>
+                </li>
+            </ul>
+            <div class="container">
+
+                <ul class="nav flex-column">
+
+                    <li class="nav-item">
+                        <a th:href="@{/student}">log in as a student</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/teacher}">log in as teacher</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/admin}">log in as admin</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+    <footer th:insert="main::footer"></footer>
+
+    </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <body>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>
+                Task name
+              </th>
+
+              <th>
+                Max points
+              </th>
+
+              <th>
+                Description
+              </th>
+
+              <th>
+                Deadline
+              </th>
+
+            </tr>
+          </thead>
+
+          <tbody>
+          <tr>
+                <td>
+                  <span th:text="${taskDescription.getName()}"></span>
+                </td>
+
+                <td>
+                  <span th:text="${taskDescription.getMax()}"></span>
+                </td>
+
+                <td>
+                  <span th:text="${taskDescription.getDescription()}"></span>
+                </td>
+
+                <td>
+                  <span th:text="${taskDescription.getDeadline()}"></span>
+                </td>
+          </tr>
+
+          <tr>
+            <td>
+              <a th:href="@{/student}">all tasks</a>
+            </td>
+          </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </body>
+</html>
+

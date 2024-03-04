@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Task name
+                    </th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr th:each="st: ${students}">
+
+                    <td>
+
+                        <a th:href="@{/teacher/teacher-student-panel/{id} (id=${st.getId()})}" th:text="${st.getFirstName()}"></a>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+
+        </table>
+    </div>
+</body>
+</html>

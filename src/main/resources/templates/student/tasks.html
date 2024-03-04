@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head th:insert="main::head">
+</head>
+
+<body>
+
+    <nav th:replace="main::navigation">
+    </nav>
+
+    <div class="fluid-container m-3">
+        <h1> Your tasks</h1>
+    </div>
+
+    <div class="fluid-container m-3">
+        <table class="table" th:class="${tableColor}">
+            <thead>
+                <tr>
+
+                    <th>
+                        Task name
+                    </th>
+
+                    <th>
+                        Deadline
+                    </th>
+
+                    <th>
+                        Finish date
+                    </th>
+
+                    <th>
+                        Points
+                    </th>
+
+                    <th>
+                        Details
+                    </th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr th:each="st: ${tasks}">
+
+                    <td>
+                        <span th:text="${st.getTask().getName()}"></span>
+                    </td>
+
+                    <td>
+                        <span th:text="${st.getTask().getDeadline()}"></span>
+                    </td>
+
+                    <td>
+                        <span th:text="${st.getFinishDate()}"></span>
+                    </td>
+
+                    <td>
+                        <span th:if="${st.getFinishDate()!=null}" th:text="${st.getNote()}"></span>
+                    </td>
+
+                    <td>
+                        <span th:if="${st.getContent()!=null}" th:text="${st.getContent()}"></span>
+                    </td>
+
+                    <td>
+
+                        <a th:if="${st.getFinishDate()==null}" th:href="@{/student/task/{id} (id=${st.getId()})}">go to your task</a>
+
+                        <a th:href="@{/student/task-description/{id} (id=${st.getId()})}">task details</a>
+
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<footer th:insert="main::footer">
+</footer>
+
+</body>
+</html>
