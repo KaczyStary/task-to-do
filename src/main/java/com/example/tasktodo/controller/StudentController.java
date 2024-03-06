@@ -28,7 +28,7 @@ public class StudentController {
         model.addAttribute("tableColor", tableConfiguration.getTableColor() + " table");
         model.addAttribute("tasks", studentService.findAllTaskForStudent(student.getId()));
 
-        return "/student/tasks";
+        return "./student/tasks";
     }
 
     @GetMapping("/student/task/{id}")
@@ -36,7 +36,7 @@ public class StudentController {
         final Optional<StudentTask> studentTaskById = studentService.findStudentTaskById(id);
         if(studentTaskById.isPresent()) {
             model.addAttribute("task", studentTaskById.get());
-            return "/student/task-form";
+            return "./student/task-form";
         }else {
             model.addAttribute("message", "Task not found");
             return "error";
@@ -48,7 +48,7 @@ public class StudentController {
         final Optional<StudentTask> studentTaskById = studentService.findStudentTaskById(id);
         if(studentTaskById.isPresent()) {
             model.addAttribute("taskDescription", studentTaskById.get().getTask());
-            return "/student/task-description";
+            return "./student/task-description";
         }else {
             model.addAttribute("message", "Task not found");
             return "error";

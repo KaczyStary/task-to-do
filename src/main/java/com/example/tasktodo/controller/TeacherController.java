@@ -29,7 +29,7 @@ public class TeacherController {
 
         model.addAttribute("students", teacherService.findAllStudentsByTeacherId(teacher.getId()));
 
-        return "/teacher/teacher-panel";
+        return "./teacher/teacher-panel";
     }
 
     @GetMapping("/teacher-student-panel/{id}")
@@ -37,7 +37,7 @@ public class TeacherController {
 
         model.addAttribute("studentInfo", teacherService.findStudentById(id));
         model.addAttribute("studentTasks", studentService.findAllTaskForStudent(id));
-        return "/teacher/teacher-student-panel";
+        return "./teacher/teacher-student-panel";
     }
 
 }
