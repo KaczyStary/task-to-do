@@ -7,10 +7,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -27,17 +29,29 @@ public class SecurityConfiguration{
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .headers((headers) -> headers.disable())
+                .headers(
+                        (headers) -> {
+                            headers.disable();
+                            headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable);
+                        }
+                )
                 .formLogin(withDefaults())
                 .logout((log)->
                         log.logoutSuccessUrl("/"))
                 .authorizeHttpRequests((aut)->
                         aut
+                                .requestMatchers(toH2Console()).permitAll()
                                 .requestMatchers("/student", "/student/**").hasRole("STUDENT")
                                 .requestMatchers("/admin", "/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/teacher", "/teacher/**").hasRole("TEACHER")
                                 .anyRequest().permitAll()
+                )
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers(toH2Console())
+                        .disable()
                 );
+
+
 
         return http.build();
     }
