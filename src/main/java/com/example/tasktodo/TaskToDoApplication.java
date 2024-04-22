@@ -42,8 +42,7 @@ public class TaskToDoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println(appConfiguration.getPassword());
-        seedData();
+
     }
 
     public void seedData(){
