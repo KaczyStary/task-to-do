@@ -25,6 +25,7 @@ public class StudentTask {
     @ManyToOne
     private Task task;
 
+    @Column(nullable = true)
     private int note;
     private LocalDateTime finishDate;
     private String content;
