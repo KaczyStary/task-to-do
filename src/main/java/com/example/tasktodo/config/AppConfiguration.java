@@ -16,6 +16,6 @@ public class AppConfiguration implements IAppConfiguration{
     @Value("${page.start}")
     private int pageStart;
 
-    @Value("${password}")
-    private String password;
+//    @Value("${password}")
+//    private String password;
 }
