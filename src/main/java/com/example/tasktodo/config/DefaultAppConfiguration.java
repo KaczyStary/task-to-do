@@ -16,8 +16,8 @@ public class DefaultAppConfiguration implements IAppConfiguration{
         return 1;
     }
 
-    @Override
-    public String getPassword() {
-        return "PASSWORD";
-    }
+//    @Override
+//    public String getPassword() {
+//        return "PASSWORD";
+//    }
 }
