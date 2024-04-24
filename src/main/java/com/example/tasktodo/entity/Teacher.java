@@ -30,6 +30,11 @@ public class Teacher implements UserDetails {
     private Boolean enabled;
 
     @OneToMany
+    @JoinTable(
+            name = "teacher_students",
+            joinColumns = @JoinColumn(name = "teacher_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
     private List<Student> students;
 
     @Override
