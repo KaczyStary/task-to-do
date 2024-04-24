@@ -11,20 +11,17 @@ DESCRIPTION
       1.1.1 USERNAME: student1
       1.1.2 PASSWORD student1
       1.1.2 ID: 1
-       
     1.2. STUDENT2
       1.2.1 USERNAME: student2
       1.2.2 PASSWORD student2
       1.1.2 ID: 2
-       
     1.3. TEACHER1
        1.3.1 USERNAME: teacher1
        1.3.2 PASSWORD: teacher1
        1.1.2 ID: 1
-       
     1.4. ADMIN NOT SUPPORTED
-
     AFTER LOGIN IF NOT LOGGED BY 'log in as a X' X->{'student', 'teacher', 'admin'} CLICK 'log in as a X' X->{ROLE OF USED ACCOUNT} TO REDIRECT TO ASSIGNED TASKS AS A STUDENT, OR VIEW STUDENTS WITH THEIR ASSIGNED TASKS AND DETAILS.
+  
   2. PAGE MOVEMENT
     2.1. AS STUDENT THERE ARE CORRECT LINKS AND REDIRECTS
     2.2. AS A TEACHER USE LINKS, THERE ARE NO BUTTONS TO REDIRECT
