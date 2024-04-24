@@ -26,7 +26,7 @@ public class StudentTask {
     private Task task;
 
     @Column(nullable = true)
-    private int note;
+    private Integer note;
     private LocalDateTime finishDate;
     private String content;
 }
