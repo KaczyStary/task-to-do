@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Profile;
 
 @Configuration
 @Data
-@Profile("dev")
 public class TableConfiguration implements ITableConfiguration{
 
     @Value("${table-color}")
