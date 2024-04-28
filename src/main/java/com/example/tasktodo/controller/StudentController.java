@@ -31,6 +31,12 @@ public class StudentController {
         return "./student/tasks";
     }
 
+    @GetMapping("/student/home")
+    public String homeStudent(@AuthenticationPrincipal Student student, Model model){
+        model.addAttribute("student", student);
+        return "./student/home-student";
+    }
+
     @GetMapping("/student/task/{id}")
     public String showTaskForm(@PathVariable long id, Model model){
         final Optional<StudentTask> studentTaskById = studentService.findStudentTaskById(id);
