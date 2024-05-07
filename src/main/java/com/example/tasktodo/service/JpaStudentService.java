@@ -58,4 +58,17 @@ public class JpaStudentService implements StudentService{
             studentTaskRepository.save(originalTask);
         }
     }
+
+    @Override
+    @Transactional
+    public void deleteStudentTask(long studentId, StudentTask task) {
+        final Optional<StudentTask> opTask = studentTaskRepository.findById(task.getId());
+
+        if (opTask.isPresent()){
+            var originalTask = opTask.get();
+            originalTask.setContent(null);
+            originalTask.setFinishDate(null);
+            studentTaskRepository.save(originalTask);
+        }
+    }
 }
