@@ -2,38 +2,86 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
+<head th:insert="main::head">
 </head>
-<body>
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        Task name
-                    </th>
 
-                </tr>
-            </thead>
+    <body th:attr="data-bs-theme=${pageTheme}" >
 
-            <tbody>
+        <nav th:replace="main::navigation"></nav>
 
-                <tr th:each="st: ${students}">
+        <div class="mt-3 m-lg-3 mb-3">
+            <div>
+                <h3 th:text="'Students:'"></h3>
+            </div>
+            <div>
+                <div class="accordion" id="accordion_1_1">
+                    <div class="accordion-item" th:each="student, stat_1 : ${students}">
+                        <h2 class="accordion-header" th:id="'heading' + ${stat_1.index}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    th:data-bs-target="${'#collapse' + stat_1.index}" aria-expanded="false"
+                                    th:aria-controls="${'collapse' + stat_1.index}" th:text="${student.getFirstName()}+ ' ' + ${student.getLastName()}">
+                            </button>
+                        </h2>
+                        <div th:id="${'collapse' + stat_1.index}" class="accordion-collapse collapse"
+                             aria-labelledby="headingOne">
+                            <div class="accordion-body">
+                                <div class="accordion" id="accordionPanelsStayOpenExample_1_2">
+                                    <div class="accordion-item" th:each="task : ${studentsTasks.get(student.getId())}">
+                                        <h2 class="accordion-header" th:id="'heading_2' + ${task.id}">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                    th:data-bs-target="${'#collapse_2' + task.id}" aria-expanded="false"
+                                                    th:aria-controls="${'collapse_2' + task.id}" th:text="${task.getTask().getName()}">
+                                            </button>
+                                        </h2>
+                                        <div th:id="${'collapse_2' + task.id}" class="accordion-collapse collapse"
+                                             aria-labelledby="headingOne">
+                                            <div class="accordion-body">
+                                                <strong th:text="'Task description:'"></strong> <p th:text="${task.getTask().getDescription()}"></p>
+                                                <strong th:if="${task.getContent()!=null}" th:text="'Task content:'"></strong> <p th:if="${task.getContent()!=null}" th:text="${task.getContent()}"></p>
+                                                <strong th:text="'Task deadline:'"></strong> <p th:text="${task.getTask().getDeadline()}"></p>
+                                                <strong th:if="${task.getFinishDate()!=null}" th:text="'Task finish date:'"></strong> <p th:if="${task.getFinishDate()!=null}" th:text="${task.getFinishDate()}"></p>
+                                                <strong th:if="${task.getNote()!=null}" th:text="'Task points:'"></strong> <p th:if="${task.getNote()!=null}" th:text="${task.getNote()}"></p>
+                                                <strong th:text="'Task max points:'"></strong> <p th:text="${task.getTask().getMax()}"></p>
+                                                <a th:href="@{/teacher/task-teacher-panel (studentId=${student.getId()}, taskId=${task.getId()})}" th:text="'Go to task'"></a>
 
-                    <td>
-
-                        <a th:href="@{/teacher/teacher-student-panel/{id} (id=${st.getId()})}" th:text="${st.getFirstName()}"></a>
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-
-        </table>
-    </div>
-</body>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 th:text="'Tasks:'" class="mt-3"></h3>
+                </div>
+                <div>
+                    <div class="accordion" id="accordion_2_1">
+                        <div class="accordion-item" th:each="tsk, stat : ${tasks}">
+                            <h2 class="accordion-header" th:id="'heading_2_1' + ${stat.index}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        th:data-bs-target="${'#collapse_2_1' + stat.index}" aria-expanded="false"
+                                        th:aria-controls="${'collapse_2_1' + stat.index}" th:text="${tsk.getName()}">
+                                </button>
+                            </h2>
+                            <div th:id="${'collapse_2_1' + stat.index}" class="accordion-collapse collapse"
+                                 aria-labelledby="headingOne">
+                                <div class="accordion-body">
+                                    <strong th:text="'Task id:'"></strong> <p th:text="${tsk.getId()}"></p>
+                                    <strong th:text="'Task name:'"></strong> <p th:text="${tsk.getName()}"></p>
+                                    <strong th:text="'Task description:'"></strong> <p th:text="${tsk.getDescription()}"></p>
+                                    <strong th:text="'Task max points:'"></strong> <p th:text="${tsk.getMax()}"></p>
+                                    <strong th:text="'Task deadline:'"></strong> <p th:text="${tsk.getDeadline()}"></p>
+                                    <a th:href="@{/teacher/edit-task/{taskId} (taskId=${tsk.getId()})}" th:text="'Edit task'"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
+
+<!--                                        <a th:href="@{/teacher/task-teacher-panel/{studentId}/{taskId} (studentId=${student.getId()}, taskId=${task.getId()})}" th:text="'Go to task'"></a>-->
