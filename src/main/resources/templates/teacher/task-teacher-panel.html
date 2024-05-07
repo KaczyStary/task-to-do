@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+
+  <head th:insert="main::head"></head>
+
+  <body th:attr="data-bs-theme=${pageTheme}">
+    <div>
+      <nav th:replace="main::navigation"></nav>
+
+      <div  th:object="${task}" class="mb-3 mt-3 m-lg-3">
+
+          <strong th:text="'Name:'"></strong> <p th:text="${task.getTask().getName()}"></p>
+          <strong th:text="'Task id:'"></strong> <p th:text="${task.getTask().getId()}"></p>
+          <strong th:text="'Description:'"></strong> <p th:text="${task.getTask().getDescription()}"></p>
+          <strong th:text="'Content:'"></strong> <p th:text="${task.getContent() != null ? task.getContent() : 'Assignment not finished yet'}"></p>
+          <strong th:text="'Deadline:'"></strong> <p th:text="${task.getTask().getDeadline()}"></p>
+          <strong th:text="'Finish date:'"></strong> <p th:text="${task.getFinishDate() != null ? task.getFinishDate() : 'Assignment not finished yet'}"></p>
+          <strong th:text="'Max points:'"></strong> <p th:text="${task.getTask().getMax()}"></p>
+          <strong th:text="'Points:'"></strong>
+
+          <form th:object="${task}" th:action="@{/teacher/rate-task}" method="post">
+              <input class="form-control" type="hidden" th:field="*{id}"/>
+              <input class="form-control" type="hidden" th:field="*{student}"/>
+              <input class="form-control" type="hidden" th:field="*{task}"/>
+
+              <select class="form-select mt-1" th:field="*{note}" aria-label="Default select example">
+                <option value="" th:if="${task.note == null}" selected>Not rated yet</option>
+                <option th:each="i : ${#numbers.sequence(0, task.getTask().getMax())}" th:value="${i}" th:selected="${task.note == i}" th:text="${i}"></option>
+              </select>
+
+              <div class="d-flex">
+                  <a th:href="@{/teacher/students}" class="text-decoration-none">
+                        <button type="button" class="btn btn-outline-danger mb-3 mt-3 " th:text="'Back'"></button>
+                  </a>
+                  <button type="submit" class="btn btn-outline-success mb-3 mt-3" th:text="'Rate'"></button>
+              </div>
+          </form>
+
+          <form th:object="${task}" th:action="@{/teacher/unRate-task}" method="post" th:if="${task.note != null}">
+              <input class="form-control" type="hidden" th:field="*{id}"/>
+              <input class="form-control" type="hidden" th:field="*{student}"/>
+              <input class="form-control" type="hidden" th:field="*{task}"/>
+              <button type="submit" class="btn btn-outline-warning mb-3" th:text="'Delete rate'"></button>
+          </form>
+      </div>
+    </div>
+  </body>
+
+</html>
