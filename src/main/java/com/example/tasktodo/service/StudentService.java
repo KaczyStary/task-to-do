@@ -11,8 +11,8 @@ public interface StudentService {
 
     Optional<StudentTask> findStudentTaskById(long id);
     List<StudentTask> findAllTaskForStudent(long studentId);
-
     void finishStudentTask(long studentId, StudentTask task);
+    void deleteStudentTask(long studentId, StudentTask task);
 
 
 }
