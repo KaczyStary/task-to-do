@@ -3,12 +3,13 @@
       xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 
-<head th:insert="main::head"></head>
+    <head th:insert="main::head"></head>
+    <body th:attr="data-bs-theme=${pageTheme}">
 
-    <body>
-    <nav th:replace="main::navigation"></nav>
+        <nav th:replace="main::navigation"></nav>
+
         <div class="container">
-            <h1> Wykonaj zadanie</h1>
+
             <h2 th:text="${task.task.name}"></h2>
 
             <div class="container m-3">
@@ -16,11 +17,17 @@
                     <input class="form-control" type="hidden" th:field="*{id}"/>
 
                     <div class="mb-3">
-                        <textarea class="form-control" th:text="*{task.description}" readonly>
-                        </textarea>
+                        <strong th:text="'Description:'"></strong> <p th:text="*{task.description}"></p>
+<!--                        <textarea class="form-control" th:text="*{task.description}" readonly>-->
+<!--                        </textarea>-->
                     </div>
 
                     <div class="mb-3">
+                        <strong th:text="'Deadline:'"></strong> <p th:text="*{task.deadline}"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong th:text="'Your answear:'"></strong>
                         <input class="form-control" type="text" th:field="*{content}">
                     </div>
 
@@ -28,15 +35,8 @@
                         <button class="btn btn-primary" type="submit">send task</button>
                     </div>
 
-              </form>
-            </div>
-
-            <div>
-                <a th:href="@{/student}">all tasks</a>
+                </form>
             </div>
         </div>
-
-        <footer th:insert="main::footer"></footer>
-
     </body>
 </html>
