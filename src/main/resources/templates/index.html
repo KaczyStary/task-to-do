@@ -10,36 +10,19 @@
         <nav th:replace="main::navigation"></nav>
 
         <div class="container m-3">
-            <div class="container">
-                <h2>Application with tasks</h2>
-            </div>
-
-<!--            <h3>Config</h3>-->
-
-<!--            <ul>-->
-<!--                <li>-->
-<!--                    Defalut page size: <span th:text="${pageSize}"></span>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    Default page start: <span th:text="${pageStart}"></span>-->
-<!--                </li>-->
-<!--            </ul>-->
-            <div class="container">
-
-                <ul class="nav flex-column">
-
-                    <li class="nav-item">
-                        <a th:href="@{/student}">log in as a student</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a th:href="@{/teacher}">log in as teacher</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a th:href="@{/admin}">log in as admin</a>
-                    </li>
-
+            <div class="container" >
+                <h2 th:text="'Accounts:'"></h2>
+                <h4 th:text="'Student1'"></h4>
+                <ul class="nav flex-column m-lg-3" >
+                    <li th:text="'User: student1 | Password: student1'"></li>
+                </ul>
+                <h4 th:text="'Student2'"></h4>
+                <ul class="nav flex-column m-lg-3" >
+                    <li th:text="'User: student2 | Password: student2'"></li>
+                </ul>
+                <h4 th:text="'Teacher1'"></h4>
+                <ul class="nav flex-column m-lg-3" >
+                    <li th:text="'User: teacher1 | Password: teacher1'"></li>
                 </ul>
             </div>
         </div>
