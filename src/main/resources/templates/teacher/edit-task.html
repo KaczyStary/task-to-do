@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+
+  <head th:insert="main::head"></head>
+
+  <body th:attr="data-bs-theme=${pageTheme}">
+    <div>
+      <nav th:replace="main::navigation"></nav>
+
+      <div th:object="${task}" class="m-lg-3 mt-3 mb-3">
+
+          <form th:object="${task}" th:action="@{/teacher/edit-task}" method="post">
+
+          <label for="exampleFormControlInput1" class="form-label mt-3" th:text="'Name:'"></label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{name}" th:value="*{getName()}" readonly>
+
+          <label for="exampleFormControlInput2" class="form-label mt-3" th:text="'Task id:'"></label>
+          <input type="text" class="form-control" id="exampleFormControlInput2" th:field="*{id}" th:value="*{getId()}">
+
+          <label for="exampleFormControlInput3" class="form-label mt-3" th:text="'Description:'"></label>
+          <input type="text" class="form-control" id="exampleFormControlInput3" th:field="*{description}" th:value="*{getDescription()}">
+
+          <label for="exampleFormControlInput5" class="form-label mt-3" th:text="'Deadline:'"></label>
+          <input type="text" class="form-control" id="exampleFormControlInput4" th:value="*{getDeadline()}" readonly>
+          <input type="datetime-local" class="form-control" id="exampleFormControlInput5" th:field="*{deadline}" th:value="*{getDeadline()}">
+
+          <label for="exampleFormControlInput6" class="form-label mt-3" th:text="'Max points:'"></label>
+          <input type="text" class="form-control" id="exampleFormControlInput6" th:field="*{max}" th:value="*{getMax()}">
+
+          <div class="d-flex">
+              <a th:href="@{/teacher/students}" class="text-decoration-none">
+                  <button type="button" class="btn btn-outline-danger mb-3 mt-3 me-1" th:text="'Back'"></button>
+              </a>
+              <button type="submit" class="btn btn-outline-warning mb-3 mt-3" th:text="'Save'"></button>
+          </div>
+
+          </form>
+
+      </div>
+
+    </div>
+  </body>
+</html>
