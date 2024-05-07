@@ -31,6 +31,14 @@ public class Teacher implements UserDetails {
 
     @OneToMany
     @JoinTable(
+            name = "teacher_tasks",
+            joinColumns = @JoinColumn(name = "teacher_id"),
+            inverseJoinColumns = @JoinColumn(name = "task_id")
+    )
+    private List<Task> tasks;
+
+    @OneToMany
+    @JoinTable(
             name = "teacher_students",
             joinColumns = @JoinColumn(name = "teacher_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id")
