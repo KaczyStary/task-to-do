@@ -4,12 +4,42 @@
       lang="en">
 
     <head th:insert="main::head">
-        <title>home-student</title>
     </head>
 
-    <body>
-        <nav th:replace="main::navigation"></nav>
-
+    <body th:attr="data-bs-theme=${pageTheme}">
+        <div>
+            <nav th:replace="main::navigation"></nav>
+            <div class="fluid-container m-3">
+                <h1> Your tasks</h1>
+            </div>
+            <div>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item" th:each="st, stat : ${tasks}">
+                        <h2 class="accordion-header" th:id="'heading' + ${stat.index}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                th:data-bs-target="${'#collapse' + stat.index}" aria-expanded="false"
+                                th:aria-controls="${'collapse' + stat.index}" th:text="${st.getTask().getName()}">
+                            </button>
+                        </h2>
+                        <div th:id="${'collapse' + stat.index}" class="accordion-collapse collapse"
+                            aria-labelledby="headingOne">
+                            <div class="accordion-body">
+                                <strong>Name:</strong> <p th:text="${st.getTask().getName()}"></p>
+                                <strong>Description:</strong> <p th:text="${st.getTask().getDescription()}"></p>
+                                <strong th:if="${st.getNote()!=null}" th:text="'Your points:'"></strong> <p th:if="${st.getNote()!=null}" th:text="${st.getNote()}"></p>
+                                <strong>Max points:</strong> <p th:text="${st.getTask().getMax()}"></p>
+                                <strong th:if="${st.getContent()!=null}" th:text="'Content:'"></strong> <p th:if="${st.getContent()!=null}" th:text="${st.getContent()}"></p>
+                                <strong th:if="${st.getFinishDate()!=null}" th:text="'Finish date:'"></strong> <p th:if="${st.getFinishDate()!=null}" th:text="${st.getFinishDate()}"></p>
+                                <strong>Deadline:</strong> <p th:text="${st.getTask().getDeadline()}"></p>
+                                <a th:if="${st.getFinishDate()==null}" th:href="@{/student/task/{id} (id=${st.getId()})}" th:text="'Go to task'"></a>
+                                <a th:if="${st.getFinishDate()!=null}" th:href="@{/student/task-edit/{id} (id=${st.getId()}) }" th:text="'Edit task'"></a>
+                                <a th:if="${st.getFinishDate()!=null}" th:href="@{/student/task-delete/{id} (id=${st.getId()}) }" th:method="delete" th:text="'Delete'"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </body>
 </html>
