@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -46,6 +47,13 @@ public class SecurityConfiguration{
                                 .requestMatchers("/teacher", "/teacher/**").hasRole("TEACHER")
                                 .anyRequest().permitAll()
                 )
+                .formLogin(formLogin ->
+                        formLogin
+                                //.loginPage("/login.html")
+                                //.loginProcessingUrl("/login")
+                                //.defaultSuccessUrl("/student/home", true)
+                                .successHandler(authenticationSuccessHandler())
+                        )
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers(toH2Console())
                         .disable()
@@ -54,6 +62,11 @@ public class SecurityConfiguration{
 
 
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new UrlAuthenticationSuccessHandler();
     }
 
 
